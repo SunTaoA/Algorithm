@@ -37,10 +37,10 @@ namespace Algorithm
                 }
                 vertexVisited = new Boolean[vertexNum];
 
-                //Default Test data:
-                //matrix[0][0] = 0; matrix[0][1] = 1; matrix[0][2] = 1;
-                //matrix[1][0] = 0; matrix[1][1] = 1; matrix[1][2] = 9;
-                //matrix[2][0] = 0; matrix[2][1] = 1; matrix[2][2] = 1;
+                //Default Test data for target value path traversal
+                //matrix[0][0] = 1; matrix[0][1] = 0; matrix[0][2] = 1; matrix[0][3] = 1;
+                //matrix[1][0] = 1; matrix[1][1] = 0; matrix[1][2] = 1; matrix[1][3] = 9;
+                //matrix[2][0] = 1; matrix[2][1] = 1; matrix[2][2] = 1; matrix[2][3] = 1;
 
                 BuildVertexs();
                 BuildEdges();
@@ -170,6 +170,13 @@ namespace Algorithm
 
             /// <summary>
             /// amazon test quiz: find all path to the point 9,  1 means can go, 0 means no way.
+            /// 1. Input is an array. Start from the point (assume [0,0]), can go up, right and down.
+            /// 2. if the value is 1, can go; if 0, can't go. 9 is the target destination.
+            /// 3. Output all different paths' node number
+            /// For example:     1 0 1 1
+            ///                  1 0 1 9
+            ///                  1 1 1 1
+            /// the output is  6,6,8  (total there are 3 paths to 9 from [0,0] 
             /// </summary>
             /// <param name="rowIndex">matrix row</param>
             /// <param name="colIndex">matrix col</param>
