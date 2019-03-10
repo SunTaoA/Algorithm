@@ -16,8 +16,7 @@ namespace Algorithm
             private Boolean[] vertexVisited;
 
             private int targetValue = 9;
-            public List<int> lstResult = new List<int>();
-
+           
             public Graph(int vertexNum =9)
             {
                 this.vertexNum = vertexNum;
@@ -182,6 +181,8 @@ namespace Algorithm
             /// <param name="colIndex">matrix col</param>
             /// <param name="value">path node number</param>
             /// <param name="vistitedArr">a flag maxtrix to mark visited edge</param>
+
+            public List<int> lstResult = new List<int>();
             public void FindNextVertex(int rowIndex, int colIndex, int value, Boolean[][] vistitedArr)
             {
                 vistitedArr[rowIndex][colIndex] = true;
