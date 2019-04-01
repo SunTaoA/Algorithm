@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Array\ArraySort.cs" />
     <Compile Include="Graph\GraphShortPath.cs" />
+    <Compile Include="List\ListOperation.cs" />
     <Compile Include="Practice\BestPlan.cs" />
     <Compile Include="Graph\GraphTraversal.cs" />
     <Compile Include="Practice\AmazonQuiz.cs" />

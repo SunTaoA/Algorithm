@@ -9,7 +9,7 @@ namespace Algorithm
        {
           public int Data { get; set; }
           public Node[] Children { get; set; }
-          public Node Right { get; set; }   // for right sibling, not right node.
+          public Node Right { get; set; }
        
           public Node(int data)
           {

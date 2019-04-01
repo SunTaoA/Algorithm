@@ -61,5 +61,54 @@ namespace Algorithm
 
             return lst;
         }
+
+        //Judge if A tree has included B tree
+        public bool IsATreeIncludeBTree(TreeNode treeA, TreeNode treeB)
+        {
+            Queue<TreeNode> q = new Queue<TreeNode>();
+
+            if (treeB == null)
+                return false;
+
+            if (treeA != null)
+            {
+                q.Enqueue(treeA);
+            }
+
+            TreeNode cur;
+            while (q.Count > 0)
+            {
+                cur = q.Dequeue();
+                
+                if (IsAHasB(cur, treeB))
+                {
+                    return true;
+                }
+
+                if (cur.Left != null) q.Enqueue(cur.Left);
+                if (cur.Right != null) q.Enqueue(cur.Right);
+            }
+
+            return false;
+         }
+
+        private bool IsAHasB(TreeNode A, TreeNode B)
+        {
+            if (A == null && B == null)
+                return true;
+            else if (A == null && B != null)
+                return false;
+            else if (A != null && B == null)
+                return true;
+            else if (A.Data != B.Data)
+                return false;
+            else
+            {
+                if (A.Data == B.Data)
+                    return (IsAHasB(A.Left, B.Left) && IsAHasB(A.Right, B.Right));
+            }
+
+            return true;
+        }
     }
 }

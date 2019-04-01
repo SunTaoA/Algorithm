@@ -16,7 +16,8 @@ namespace Algorithm
             private Boolean[] vertexVisited;
 
             private int targetValue = 9;
-           
+            public List<int> lstResult = new List<int>();
+
             public Graph(int vertexNum =9)
             {
                 this.vertexNum = vertexNum;
@@ -36,10 +37,10 @@ namespace Algorithm
                 }
                 vertexVisited = new Boolean[vertexNum];
 
-                //Default Test data for target value path traversal
-                //matrix[0][0] = 1; matrix[0][1] = 0; matrix[0][2] = 1; matrix[0][3] = 1;
-                //matrix[1][0] = 1; matrix[1][1] = 0; matrix[1][2] = 1; matrix[1][3] = 9;
-                //matrix[2][0] = 1; matrix[2][1] = 1; matrix[2][2] = 1; matrix[2][3] = 1;
+                //Default Test data:
+                //matrix[0][0] = 0; matrix[0][1] = 1; matrix[0][2] = 1;
+                //matrix[1][0] = 0; matrix[1][1] = 1; matrix[1][2] = 9;
+                //matrix[2][0] = 0; matrix[2][1] = 1; matrix[2][2] = 1;
 
                 BuildVertexs();
                 BuildEdges();
@@ -123,11 +124,15 @@ namespace Algorithm
 
             private void BuildEdges()
             {
-                Console.WriteLine("Input edge of starting vertex and end vertex, comma as separation:");
+                Console.WriteLine("Input edge of starting vertex and end vertex, comma as separation(99 for end):");
+                Console.WriteLine("For example: 1,4");
+                Console.WriteLine("2,3");
+                Console.WriteLine("1,2");
+                Console.WriteLine("99");
 
                 var strInput = Console.ReadLine();
 
-                while (strInput != "No")
+                while (strInput != "99")
                 {
                     string[] ele = strInput.Split(new char[] { ',' });
                     if (ele.Length == 2)
@@ -169,20 +174,11 @@ namespace Algorithm
 
             /// <summary>
             /// amazon test quiz: find all path to the point 9,  1 means can go, 0 means no way.
-            /// 1. Input is an array. Start from the point (assume [0,0]), can go up, right and down.
-            /// 2. if the value is 1, can go; if 0, can't go. 9 is the target destination.
-            /// 3. Output all different paths' node number
-            /// For example:     1 0 1 1
-            ///                  1 0 1 9
-            ///                  1 1 1 1
-            /// the output is  6,6,8  (total there are 3 paths to 9 from [0,0] 
             /// </summary>
             /// <param name="rowIndex">matrix row</param>
             /// <param name="colIndex">matrix col</param>
             /// <param name="value">path node number</param>
             /// <param name="vistitedArr">a flag maxtrix to mark visited edge</param>
-
-            public List<int> lstResult = new List<int>();
             public void FindNextVertex(int rowIndex, int colIndex, int value, Boolean[][] vistitedArr)
             {
                 vistitedArr[rowIndex][colIndex] = true;
@@ -221,6 +217,75 @@ namespace Algorithm
                 }
            }
 
+            //clockwise print maxtix
+            //public List<int> printMatrix(int[][] matrix)
+            public List<int> printMatrixClosewise()
+            {
+                //Initial a matix for testing, you may rebuild this matrix:
+                int[][] matrix = new int[4][];
+                matrix[0] = new int[4]; matrix[1] = new int[4]; matrix[2] = new int[4]; matrix[3] = new int[4];
+
+                matrix[0][0] = 1; matrix[0][1] = 2; matrix[0][2] = 3; matrix[0][3] = 4;
+                matrix[1][0] = 5; matrix[1][1] = 6; matrix[1][2] = 7; matrix[1][3] = 8;
+                matrix[2][0] = 9; matrix[2][1] = 10; matrix[2][2] = 11; matrix[2][3] = 12;
+                matrix[3][0] = 13; matrix[3][1] = 14; matrix[3][2] = 15; matrix[3][3] = 16;
+
+                int iRow = matrix.GetUpperBound(0);
+                int iCol = matrix[0].Length;
+
+                Boolean[][] visited;    // add a visited array to mark the element if the element visited
+                visited = new Boolean[iRow+1][];
+                for (int i = 0; i <= iRow; i++)
+                    visited[i] = new bool[iCol];
+
+                List<int> lstRet = new List<int>();
+
+                int curRow = 0;
+                int curCol = 0;
+                LoopMatrix(curRow, curCol, matrix, visited, lstRet); //visit the matrix recursive
+                return lstRet;
+            }
+
+            private void LoopMatrix(int curRow, int curCol, int[][] matrix, Boolean[][]visited, List<int> lstRet)
+            {
+                int iRow = matrix.GetUpperBound(0);
+                int iCol = matrix[0].Length -1;
+
+                visited[curRow][curCol] = true;
+                lstRet.Add(matrix[curRow][curCol]);
+
+                //Left and down direction is available(index is in boundary), choose Left direction
+                if ((curRow + 1) <= iRow && (curCol + 1) <= iCol && !visited[curRow][curCol + 1] && !visited[curRow+1][curCol])
+                    LoopMatrix(curRow, curCol + 1, matrix, visited, lstRet);
+
+                //Down and right direction is available(index is in boundary), choose down direction
+                if (curRow +1 <= iRow && curCol-1 >= 0 && (curRow + 1) <= iRow && !visited[curRow + 1][curCol] && !visited[curRow][curCol-1])
+                    LoopMatrix(curRow + 1, curCol, matrix, visited, lstRet);
+                
+                //Right and Up direction is available (index is in boundary) choose right direction
+                if(curRow - 1 >= 0 && curCol -1 >= 0 && curCol-1 >= 0  && !visited[curRow][curCol - 1] && !visited[curRow-1][curCol])
+                    LoopMatrix(curRow, curCol - 1, matrix, visited, lstRet);
+                
+                //up and left direction is available(index is in boundary) choose up direction
+                if (curRow -1 >= 0 && curCol + 1 <= iCol && (curRow - 1) >=0 && !visited[curRow-1][curCol] && !visited[curRow][curCol+1])
+                    LoopMatrix(curRow-1, curCol, matrix, visited, lstRet);
+
+                // only left direction
+                if ((curCol + 1) <= iCol && !visited[curRow][curCol + 1])
+                    LoopMatrix(curRow, curCol + 1, matrix, visited, lstRet);
+                
+                //only down direction
+                if ((curRow + 1) <= iRow && !visited[curRow + 1][curCol])
+                    LoopMatrix(curRow + 1, curCol, matrix, visited, lstRet);
+                
+                //only right direction
+                if (curCol - 1 >= 0 && !visited[curRow][curCol - 1])
+                    LoopMatrix(curRow, curCol - 1, matrix, visited, lstRet);
+                
+                //only up direction
+                if (curRow - 1 >= 0 && !visited[curRow - 1][curCol])
+                    LoopMatrix(curRow - 1, curCol, matrix, visited, lstRet);
+            }
         }
     }
 }

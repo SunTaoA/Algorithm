@@ -11,6 +11,22 @@ namespace Algorithm
        
         static void Main(string[] args)
         {
+            // List test
+            #region List Test Cases
+            ListNode pHead1 = new ListNode(1);
+            pHead1.next = new ListNode(3);
+            pHead1.next.next = new ListNode(5);
+
+            var kNode = new ListOperation().FindKthToTail(pHead1, 1);
+            var rev = new ListOperation().ReverseList(null);
+
+            ListNode pHead2 = new ListNode(2);
+            pHead2.next = new ListNode(4);
+            pHead2.next.next = new ListNode(6);
+
+             var lstTmp = new ListOperation().Merge(pHead1, pHead2);
+            #endregion
+
             //Array Sort Test
             #region ArrayTest
             var arrsort = new ArraySort(); 
@@ -22,6 +38,8 @@ namespace Algorithm
             //Graph Test
             #region Graph Test
             GraphTraversal.Graph graph = new GraphTraversal.Graph();
+            var retList = graph.printMatrixClosewise();
+
             graph.DFS();
             graph.BFS();
 
@@ -83,6 +101,13 @@ namespace Algorithm
 
             int totalLeaves = treeOper.TotalLeaves(t.Root);
 
+            Tree B = new Tree();
+            B.InsertNode(3);
+            B.InsertNode(4);
+            B.InsertNode(5);
+            B.InsertNode(6);
+
+            var bIncluded = treeOper.IsATreeIncludeBTree(t.Root, B.Root);
 
             var projectionTreeView = new ProjectionTree();
             lstRet.Clear();
