@@ -92,32 +92,87 @@ namespace Algorithm
         }
 
         // can array represent pre-order BST
-        public bool IsArrValidBST(int[] pre, int n)
+        //pre-order: root node is at the beginning of array, the first node greater than root is the right tree start
+        //all elments behind first node should be greater than the root node (recursive this step)
+        public bool IsArrValidPreOrderBST(int[] pre)
         {
+            if (pre.Length == 0) return false;
+            if (pre.Length == 1) return true;
 
-            Stack<int> stack = new Stack<int>();
-
-            int root = int.MinValue;
-
-            // Traverse given array 
-            for (int i = 0; i < n; i++)
+            int root = pre[0];
+            int rightIndex = 0;
+            for(int i=0; i <= pre.Length-1; i++)
+            {
+                if (pre[i] > root)
+                {
+                    rightIndex = i;
+                    break;
+                }
+            }
+           
+            for(int i = rightIndex; i <= pre.Length -1; i++)
             {
                 if (pre[i] < root)
-                {
                     return false;
-                }
-
-                while (stack.Count > 0 && stack.Peek() < pre[i])
-                {
-                    root = stack.Pop();
-                }
-
-                stack.Push(pre[i]);
             }
 
-            return true;
+            bool bLeft = true;
+            if (rightIndex -1 > 0)
+            { 
+              int[] leftArr = new int[rightIndex-1];
+              Array.Copy(pre, 1, leftArr, 0, rightIndex-1);
+              bLeft = IsArrValidPreOrderBST(leftArr); 
+            }
+
+            bool bRight = true;
+            if (pre.Length - rightIndex > 0)
+            { 
+                int[] rightArr = new int[pre.Length - rightIndex];
+                Array.Copy(pre, rightIndex, rightArr, 0, pre.Length - rightIndex);
+                bRight = IsArrValidPreOrderBST(rightArr);
+            }
+            return bLeft && bRight;
         }
 
+        //can array represent post-order BST
+        // post-order: the root number is at end of array.  search the array the last number less than the root number
+        // is the start of left tree. all left tree nodes number less than root.
+        // recursive the steps
+        public bool IsArrValidPostOrderBST(int[] pre)
+        {
+            if (pre.Length == 0) return false;
+            if (pre.Length == 1) return true;
+
+            int end = pre[pre.Length - 1];
+            int left = 0;
+            for(int i= pre.Length -1; i>=0; i--)
+            {
+                if (pre[i] < end)
+                {
+                    left = i;
+                    break;
+                }
+            }
+
+            for(int i=0; i < left; i++)
+            {
+                if (pre[i] >= end)
+                    return false;
+            }
+
+            int[] leftArr = new int[left + 1];
+            Array.Copy(pre, leftArr, left + 1);
+
+            bool bRight = true;
+            int[] rightArr = new int[pre.Length - left - 1];
+            if ((pre.Length - left - 1) > 0)
+            { 
+                Array.Copy(pre, left + 1, rightArr, 0, pre.Length - left - 1);
+                bRight = IsArrValidPostOrderBST(rightArr);
+            }
+
+            return IsArrValidPostOrderBST(leftArr) && bRight;
+        }
     }
 
 

@@ -11,6 +11,7 @@ namespace Algorithm
        
         static void Main(string[] args)
         {
+        
             // List test
             #region List Test Cases
             ListNode pHead1 = new ListNode(1);
@@ -33,6 +34,8 @@ namespace Algorithm
             var arr = arrsort.BubbleSort(new int[]{2,3,98,10,23,45,4,6 });
             arr = arrsort.QuickSort(arr, arr.GetLowerBound(0), arr.GetUpperBound(0));
             arr = arrsort.SelectSort(arr);
+
+            ArrayOper.IsPopOrder(new int[] { 1, 2, 3, 4, 5 }, new int[] { 4, 5, 3, 2, 1 });
             #endregion
 
             //Graph Test
@@ -72,8 +75,20 @@ namespace Algorithm
 
             t.IsBST(t.Root, int.MinValue,int.MaxValue);
 
+            //another invalid test cases
+            Tree bst = new Tree();
+            bst.Root = new TreeNode(3);
+            bst.Root.Left = new TreeNode(2);
+            bst.Root.Right = new TreeNode(5);
+            bst.Root.Left.Left = new TreeNode(1);
+            bst.Root.Left.Right = new TreeNode(4);
+            bool isBST = bst.IsBST(bst.Root, int.MinValue, int.MaxValue);
+            
+            int[] testData = new int[]{ 10, 6, 11, 12, 7 };
+            //int[] testData = new int[] { 10, 12, 14,17,18 };
+            var bRet = t.IsArrValidPreOrderBST(testData);
+
             List<int> lstRet = new List<int>();
-         
             var recTraversal = new RecTraversal();
             recTraversal.PreOrderTreeRecursive(t.Root, lstRet);
 
