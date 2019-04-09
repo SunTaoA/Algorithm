@@ -110,5 +110,47 @@ namespace Algorithm
 
             return true;
         }
+
+
+        //find all paths in which the sum of node value equals to expectNumber
+        // out put all paths via path length (first is the longest)
+        List<List<int>> totalRet = new List<List<int>>();
+        List<int> lstOne = new List<int>();
+        public List<List<int>> FindPath(Tree tree, int expectNumber)
+        {
+            if (tree == null) return totalRet;
+
+            OnePath(tree.Root, expectNumber);  //set results to totalRet list
+
+            totalRet.Sort((x, y) => { return (y.Count().CompareTo(x.Count())); });
+
+            return totalRet;
+        }
+
+        private void OnePath(TreeNode root, int expectNumber)
+        {
+            if (root != null)
+                lstOne.Add(root.Data);
+
+            if (root.Left == null && root.Right == null)   //come to end node: leaf
+            {
+                if (lstOne.Sum() == expectNumber)          //fine one path
+                    totalRet.Add(new List<int>(lstOne));
+            }
+
+            if (root.Left != null)
+            {
+                OnePath(root.Left, expectNumber);
+                lstOne.Remove(lstOne.Last());
+            }
+
+
+            if (root.Right != null)
+            {
+                OnePath(root.Right, expectNumber);
+                lstOne.Remove(lstOne.Last());
+            }
+        }
+
     }
 }

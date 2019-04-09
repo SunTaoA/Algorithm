@@ -77,11 +77,11 @@ namespace Algorithm
 
             //another invalid test cases
             Tree bst = new Tree();
-            bst.Root = new TreeNode(3);
-            bst.Root.Left = new TreeNode(2);
-            bst.Root.Right = new TreeNode(5);
-            bst.Root.Left.Left = new TreeNode(1);
-            bst.Root.Left.Right = new TreeNode(4);
+            bst.Root = new TreeNode(10);
+            bst.Root.Left = new TreeNode(5);
+            bst.Root.Right = new TreeNode(12);
+            bst.Root.Left.Left = new TreeNode(4);
+            bst.Root.Left.Right = new TreeNode(7);
             bool isBST = bst.IsBST(bst.Root, int.MinValue, int.MaxValue);
             
             int[] testData = new int[]{ 10, 6, 11, 12, 7 };
@@ -110,6 +110,8 @@ namespace Algorithm
             var treeOper = new TreeOperations();
             treeOper.SumEachPath(t.Root, 0, lstRet);
 
+            var totalRet = treeOper.FindPath(bst, 22);
+
             int max = treeOper.MaxHeightOfTree(t.Root);
 
             int totalNodes = treeOper.TotalNodes(t.Root);
@@ -117,11 +119,12 @@ namespace Algorithm
             int totalLeaves = treeOper.TotalLeaves(t.Root);
 
             Tree B = new Tree();
-            B.InsertNode(3);
-            B.InsertNode(4);
+            B.InsertNode(10);
             B.InsertNode(5);
-            B.InsertNode(6);
-
+            B.InsertNode(4);
+            B.InsertNode(7);
+            B.InsertNode(12);
+            
             var bIncluded = treeOper.IsATreeIncludeBTree(t.Root, B.Root);
 
             var projectionTreeView = new ProjectionTree();
