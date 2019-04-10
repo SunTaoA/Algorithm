@@ -132,6 +132,42 @@ namespace Algorithm
 
             return start;
         }
+
+        //Link list clone example
+        public class RandomListNode
+        {
+            public int label;
+            public RandomListNode next, random;
+            public RandomListNode(int x)
+            {
+                this.label = x;
+            }
+        }
+
+        RandomListNode cloneHead = null;
+        public RandomListNode Clone(RandomListNode pHead)
+        {
+            if (pHead == null) return null;
+
+            RandomListNode cur = null;
+            cur = new RandomListNode(pHead.label);
+            cloneHead = cur;
+            if (pHead.random != null)
+                cur.random = new RandomListNode(pHead.random.label);
+
+            pHead = pHead.next;
+            while (pHead != null)
+            {
+                cur.next = new RandomListNode(pHead.label);
+                if (pHead.random != null)
+                    cur.next.random = new RandomListNode(pHead.random.label);
+
+                pHead = pHead.next;
+                cur = cur.next;
+            }
+
+            return cloneHead;
+        }
     }
 
     

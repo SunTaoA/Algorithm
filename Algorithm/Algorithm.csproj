@@ -49,6 +49,7 @@
     <Compile Include="Graph\GraphTraversal.cs" />
     <Compile Include="Practice\AmazonQuiz.cs" />
     <Compile Include="Recursion\Backtracking.cs" />
+    <Compile Include="String\MyStr.cs" />
     <Compile Include="Tree\BinaryTree.cs" />
     <Compile Include="Tree\BreadthTraversal.cs" />
     <Compile Include="Tree\MultipleTree.cs" />

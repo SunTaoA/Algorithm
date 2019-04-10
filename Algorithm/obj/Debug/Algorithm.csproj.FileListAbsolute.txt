@@ -1,0 +1,6 @@
+C:\Users\tsun6\OneDrive - DXC Production\SunTao\GitAlgorithm\Algorithm\bin\Debug\Algorithm.exe
+C:\Users\tsun6\OneDrive - DXC Production\SunTao\GitAlgorithm\Algorithm\bin\Debug\Algorithm.pdb
+C:\Users\tsun6\OneDrive - DXC Production\SunTao\GitAlgorithm\Algorithm\obj\Debug\Algorithm.csproj.CoreCompileInputs.cache
+C:\Users\tsun6\OneDrive - DXC Production\SunTao\GitAlgorithm\Algorithm\obj\Debug\Algorithm.exe
+C:\Users\tsun6\OneDrive - DXC Production\SunTao\GitAlgorithm\Algorithm\obj\Debug\Algorithm.pdb
+C:\Users\tsun6\OneDrive - DXC Production\SunTao\GitAlgorithm\Algorithm\obj\Debug\Algorithm.csprojAssemblyReference.cache

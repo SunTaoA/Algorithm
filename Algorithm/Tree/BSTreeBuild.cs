@@ -173,8 +173,36 @@ namespace Algorithm
 
             return IsArrValidPostOrderBST(leftArr) && bRight;
         }
+
+        // Convert BST tree as sorted bi-linked list
+        public TreeNode head;
+        public TreeNode pre;
+        public bool bCreated = false;
+        public TreeNode ConvertToSortedList(TreeNode pRootOfTree)
+        {
+            if (pRootOfTree.Left != null)
+                ConvertToSortedList(pRootOfTree.Left);
+
+            if (!bCreated)
+            {
+                pre = pRootOfTree;
+                head = pre;
+                pre.Left = null;
+                bCreated = true;
+            }
+            else
+            {
+                pre.Right = pRootOfTree;
+                pRootOfTree.Left = pre;
+
+                pre = pRootOfTree;
+            }
+
+            if (pRootOfTree.Right != null)
+                ConvertToSortedList(pRootOfTree.Right);
+
+            return head;
+        }
     }
-
-
 
 }

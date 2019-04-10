@@ -11,7 +11,7 @@ namespace Algorithm
        
         static void Main(string[] args)
         {
-        
+            
             // List test
             #region List Test Cases
             ListNode pHead1 = new ListNode(1);
@@ -38,6 +38,14 @@ namespace Algorithm
             ArrayOper.IsPopOrder(new int[] { 1, 2, 3, 4, 5 }, new int[] { 4, 5, 3, 2, 1 });
             #endregion
 
+            //String practice
+            #region string
+            var lstStr = new MyStr().Permutation("abcdefg");
+            //foreach (var e in lstStr)
+            //    Console.WriteLine(e);
+            
+            #endregion
+            
             //Graph Test
             #region Graph Test
             GraphTraversal.Graph graph = new GraphTraversal.Graph();
@@ -74,6 +82,10 @@ namespace Algorithm
             t.InsertNode(1);
 
             t.IsBST(t.Root, int.MinValue,int.MaxValue);
+
+            t.ConvertToSortedList(t.Root);
+            
+            var x = t.head.Data;
 
             //another invalid test cases
             Tree bst = new Tree();
