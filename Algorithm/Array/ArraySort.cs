@@ -74,7 +74,6 @@ namespace Algorithm
             return j + 1;
         }
 
-
         private void Swap(int[] arr, int small, int big)
         {
             int tmp = arr[big];
@@ -82,5 +81,63 @@ namespace Algorithm
             arr[small] = tmp;
         }
 
+        //Merge sort
+        //input array is random numbers
+        //first seperate the array in middle till to 1-1 (recursive)
+        //then merge two sorted array into one till into one sorted array as returned.
+        public int[] MergeSort(int[] aryInput)
+        {
+            int[] aryRet = new int[aryInput.Length];
+
+            int left = 0;
+            int end = aryInput.Length - 1;
+           
+            sort(aryInput, left, end, aryRet);
+
+            return aryRet;
+        }
+
+        private void sort(int[] aryInput, int left, int end, int[] aryRet)
+        {
+            if(left < end)
+            { 
+              int middle = (left + end) / 2;
+
+              sort(aryInput, left, middle, aryRet);
+              sort(aryInput, middle + 1, end, aryRet);
+              merge(aryInput,left, middle, end, aryRet);
+            }
+        }
+
+        private void merge(int[] firstAry, int left, int middle, int end, int[]secAry)
+        {
+            
+            int i=left, k=middle+1;
+            int start = left;
+
+            while (i <= middle && k <= end)
+            {
+                    if (firstAry[i] > firstAry[k])
+                    {
+                        secAry[start++] = firstAry[k++];
+                    }
+                    else
+                        secAry[start++] = firstAry[i++];
+            }
+
+            if (i <= middle)
+            {
+                for (int m = i; m <= middle; m++)
+                    secAry[start++] = firstAry[m];
+            }
+            
+            if (k <= end)
+            {
+                for (int m = k; m <= end; m++)
+                    secAry[start++] = firstAry[m];
+            }
+
+            Array.Copy(secAry, left, firstAry, left, end - left + 1);
+        }
     }
 }

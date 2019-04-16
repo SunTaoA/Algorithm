@@ -8,10 +8,10 @@ namespace Algorithm
 {
     class Program
     {
-       
+
         static void Main(string[] args)
         {
-            
+          
             // List test
             #region List Test Cases
             ListNode pHead1 = new ListNode(1);
@@ -34,17 +34,20 @@ namespace Algorithm
             var arr = arrsort.BubbleSort(new int[]{2,3,98,10,23,45,4,6 });
             arr = arrsort.QuickSort(arr, arr.GetLowerBound(0), arr.GetUpperBound(0));
             arr = arrsort.SelectSort(arr);
+            arr = arrsort.MergeSort(new int[] { 2, 3, 18, 10, 20, 15, 4, 6 });
 
             ArrayOper.IsPopOrder(new int[] { 1, 2, 3, 4, 5 }, new int[] { 4, 5, 3, 2, 1 });
-            #endregion
 
-            //String practice
-            #region string
-            var lstStr = new MyStr().Permutation("abcdefg");
-            //foreach (var e in lstStr)
-            //    Console.WriteLine(e);
-            
+            var retNum = ArrayOper.MoreThanHalfNum(new int[] { 1, 2, 3, 2, 4, 2, 5, 2, 3 });
+
+            ArrayOper.PrintMinNumber(new int[] { 2, 3, 4, 5, 1 });
+
+            var urglyNum = ArrayOper.GetUglyNumber(10);
+            var firstChar = ArrayOper.FirstNotRepeatingChar("google");
+            var reverseNum = ArrayOper.InversePairs(new int[] { 1, 2, 3, 4, 5, 6, 7, 0 });
             #endregion
+            //String practice
+             
             
             //Graph Test
             #region Graph Test
