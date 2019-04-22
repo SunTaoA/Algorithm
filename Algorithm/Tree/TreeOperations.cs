@@ -152,6 +152,71 @@ namespace Algorithm
             }
         }
 
-        
+        // judge if tree is balanced binary search tree
+        public bool IsBalancedBST(TreeNode pRoot)
+        {
+            if (pRoot == null) return true;
+
+            int depth = 0;
+            AllDepth(pRoot, depth);
+
+            var min = lstDepth.Min();
+            if (lstDepth.Count() == 1) return (min == 1);
+            if (lstDepth.Any(x => (x - min) > 1)) return false;
+
+            return true;
+        }
+
+        public List<int> lstDepth = new List<int>();
+        public void AllDepth(TreeNode pRoot, int depth)
+        {
+            
+            if (pRoot.Left == null && pRoot.Right == null)
+                lstDepth.Add(depth + 1);
+
+            if (pRoot.Left != null)
+                AllDepth(pRoot.Left, depth + 1);
+
+            if (pRoot.Right != null)
+                AllDepth(pRoot.Right, depth + 1);
+        }
+
+        public bool IsBST(TreeNode pRoot)
+        {
+            bool bLeft = true, bRight = true, bSecondLeft = true, bSecondRight = true;
+            if (pRoot == null)
+                return true;
+
+            if (pRoot.Left != null)
+            {
+                if (pRoot.Left.Data > pRoot.Data)
+                    bLeft = false;
+
+                if (pRoot.Left.Left != null)
+                {
+                    if (pRoot.Left.Left.Data > pRoot.Left.Data)
+                    {
+                        bSecondLeft = false;
+                    }
+                    bLeft = bLeft && bSecondLeft;
+                }
+            }
+
+            if (pRoot.Right != null)
+            {
+                if (pRoot.Right.Data < pRoot.Data) bRight = false;
+                if (pRoot.Right.Right != null)
+                {
+                    if (pRoot.Right.Right.Data < pRoot.Right.Data)
+                    {
+                        bSecondRight = false;
+                    }
+                    bRight = bRight && bSecondRight;
+                }
+            }
+
+            bLeft = bLeft && bRight;
+            return bLeft && IsBST(pRoot.Left) && IsBST(pRoot.Right);
+        }
     }
 }

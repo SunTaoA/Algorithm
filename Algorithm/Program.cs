@@ -11,7 +11,7 @@ namespace Algorithm
 
         static void Main(string[] args)
         {
-          
+            
             // List test
             #region List Test Cases
             ListNode pHead1 = new ListNode(1);
@@ -45,6 +45,11 @@ namespace Algorithm
             var urglyNum = ArrayOper.GetUglyNumber(10);
             var firstChar = ArrayOper.FirstNotRepeatingChar("google");
             var reverseNum = ArrayOper.InversePairs(new int[] { 1, 2, 3, 4, 5, 6, 7, 0 });
+
+            int[] num1 = new int[1];
+            int[] num2 = new int[1];
+            ArrayOper.FindTwoNumbersAppearOnce(new int[] { 1, 1, 2, 2, 3, 4, 5, 5, 4, 3, 6, 7 }, num1, num2);
+            
             #endregion
             //String practice
              
@@ -85,20 +90,22 @@ namespace Algorithm
             t.InsertNode(1);
 
             t.IsBST(t.Root, int.MinValue,int.MaxValue);
-
-            t.ConvertToSortedList(t.Root);
+          
+            //t.ConvertToSortedList(t.Root);
             
-            var x = t.head.Data;
+            //var x = t.head.Data;
 
             //another invalid test cases
             Tree bst = new Tree();
             bst.Root = new TreeNode(10);
             bst.Root.Left = new TreeNode(5);
             bst.Root.Right = new TreeNode(12);
-            bst.Root.Left.Left = new TreeNode(4);
+            bst.Root.Left.Left = new TreeNode(6);
             bst.Root.Left.Right = new TreeNode(7);
+
             bool isBST = bst.IsBST(bst.Root, int.MinValue, int.MaxValue);
-            
+            var secTreeOperBst = new TreeOperations().IsBST(bst.Root);
+
             int[] testData = new int[]{ 10, 6, 11, 12, 7 };
             //int[] testData = new int[] { 10, 12, 14,17,18 };
             var bRet = t.IsArrValidPreOrderBST(testData);
@@ -134,13 +141,20 @@ namespace Algorithm
             int totalLeaves = treeOper.TotalLeaves(t.Root);
 
             Tree B = new Tree();
-            B.InsertNode(10);
-            B.InsertNode(5);
+            B.InsertNode(1);
+            B.InsertNode(2);
+            B.InsertNode(3);
             B.InsertNode(4);
+            B.InsertNode(5);
+            B.InsertNode(6);
             B.InsertNode(7);
-            B.InsertNode(12);
-            
+
             var bIncluded = treeOper.IsATreeIncludeBTree(t.Root, B.Root);
+
+            var bTreeOperBst = treeOper.IsBST(B.Root);
+            treeOper.AllDepth(B.Root, 0);
+            var lstOperRet = treeOper.lstDepth;
+            var isbalanceBST = treeOper.IsBalancedBST(B.Root);
 
             var projectionTreeView = new ProjectionTree();
             lstRet.Clear();

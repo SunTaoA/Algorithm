@@ -88,12 +88,12 @@ namespace Algorithm
         public ListNode FindKthToTail(ListNode head, int k)
         {
             int i = 0;
-           ListNode cal = head;
+            ListNode cal = head;
             while (cal!=null)
-           {
+            {
                 i++;
                 cal = cal.next; 
-           }
+            }
 
             int j = i - k + 1;
             for (int start = 1; start < j; start++)
@@ -167,6 +167,27 @@ namespace Algorithm
             }
 
             return cloneHead;
+        }
+
+        //Find first intersection node of two different  link list
+        public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2)
+        {
+            //ListNode pHeadHelp = pHead2;
+            while (pHead1 != null)
+            {
+                ListNode pHeadHelp = pHead2;
+                while (pHeadHelp != null)
+                {
+                    if (pHead1 == pHeadHelp)
+                        return pHead1;
+                    else
+                    {
+                        pHeadHelp = pHeadHelp.next;
+                    }
+                }
+                pHead1 = pHead1.next;
+            }
+            return null;
         }
     }
 

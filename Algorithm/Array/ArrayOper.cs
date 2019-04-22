@@ -220,5 +220,47 @@ namespace Algorithm
             return (totalPairs);
             //return (totalPairs % 1000000007);
         }
+
+        //in a number serial there two different number, others are pairs. find out these two numbers
+        public static void FindTwoNumbersAppearOnce(int[] array, int[] num1, int[] num2)
+        {
+            int result =0 ;
+            foreach (var e in array)
+                result = result ^ e;
+
+            int index = GetBit1Location(result);
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                if (IndexLocation1(array[i], index))
+                    num1[0] = num1[0] ^ array[i];
+                else
+                    num2[0] = num2[0] ^ array[i];
+            }
+
+            return;
+        }
+
+        private static int GetBit1Location(int result)
+        {
+            int index = 1;
+            while( (result & 1) == 0)
+            {
+                result = result >> index;
+                index++;
+            }
+
+            return index;
+        }
+
+        private static bool IndexLocation1(int num, int index)
+        {
+            num = num >> (index - 1);
+            if ((num & 1) == 0)
+                    return true;
+            else
+               return false;
+        }
+
     }
 }
